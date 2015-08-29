@@ -25,10 +25,10 @@ void stack::push(int item) {
 	node* n = new node;
 	
 	n->info = item;
-	n->next = NULL;
-	if (top != NULL) {
-		n->next = top; //works as LIFO
-	}
+	n->next = top; //first node has it's next pointer set to NULL, so it's last item.
+//	if (top != NULL) {
+//		n->next = top; //works as LIFO
+//	}
 	top = n;
 }
 
@@ -44,7 +44,6 @@ int stack::pop() {
 		value = temp->info;
 		delete temp;
 	}
-//	return value;
 	return value;
 }
 
@@ -69,7 +68,7 @@ class graph {
 private:
 	int noOfNodes;
 	char* nodeNames;
-	short** adjMatrix; // adjacency matrix, stores only 0 or 1
+	short** adjMatrix; // adjacency matrix, 0 means no edge and 1 means adjacent
 public:
 	graph(int noOfNodes, char *names);
 	~graph();
@@ -143,7 +142,7 @@ void graph::addEdge(char edgeList[][3], int noOfEdges) {
 }
 
 
-void graph::DFS(char cStartNode, char cGoalNode) {
+void graph::DFS(char cStartNode, char cGoalNode) { //creates spanning tree of graph up untill goal node is found using DFS
 	int i, startNode, goalNode;
 	for (i = 0; i < noOfNodes; i++) {
 		if (nodeNames[i] == cStartNode) {
@@ -172,7 +171,7 @@ void graph::DFS(char cStartNode, char cGoalNode) {
 	cout << " : " << endl;
 	while (!s.isEmpty())
 	{
-		currentNode = s.pop();
+		currentNode = s.pop(); // pop most recently visited node
 		//cout << currentNode+1;
 		cout << nodeNames[currentNode];
 		if (currentNode == goalNode) {
@@ -183,7 +182,7 @@ void graph::DFS(char cStartNode, char cGoalNode) {
 			cout << " -> ";
 		}
 		for (i = noOfNodes-1; i >= 0; i--) {
-			if (isConnected(currentNode, i) && !visited[i]) {
+			if (isConnected(currentNode, i) && !visited[i]) { //pushes child nodes and excludes parent
 				s.push(i);
 				visited[i] = true;
 			}
