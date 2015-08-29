@@ -165,7 +165,7 @@ void graph::DFS(char cStartNode, char cGoalNode) {
 	}
 	s.push(startNode);
 	visited[startNode] = true;
-	if (startNode == goalNode) return;
+	//if (startNode == goalNode) return;
 	cout << "Depth First Search starting from node ";
 	//cout << startNode+1 ;
 	cout << nodeNames[startNode];
@@ -194,8 +194,8 @@ void graph::DFS(char cStartNode, char cGoalNode) {
 }
 
 int main() {
-	char* nodes = "ABCDEFGH";
-	graph g(8, nodes);
+	char* nodes = "ABCDEFGHIJKLMNO";
+	graph g(15, nodes);
 
 	//g.addEdge(1, 2); g.addEdge(1, 3); g.addEdge(2, 4);
 	//g.addEdge(2, 5); g.addEdge(3, 6); g.addEdge(3, 7);
@@ -204,12 +204,35 @@ int main() {
 
 	char edgeList[][3] = {
 		//{ 'A', 'B' }, 'A', 'C', { 'B', 'D' }, {'B', 'E'} , 'C', 'F', 'C', 'G'
-		"AB", "AC", "BD", "BE", "CF", "CG"
+		"AB", "AC", "BD", "BE", "CF", "CG",
+		"DH", "DI", "EJ", "EK", "FL", "FM",
+		"GN", "GO"
 	};
 
-	g.addEdge(edgeList, 6);
+	g.addEdge(edgeList, 14);
 
-	g.DFS('A', 'F');
+	//g.DFS('A', 'N');
+	char cStart, cGoal;
+	cout << "Given nodes are \n";
+	for (int i = 0; i < 15; i++)
+		cout << nodes[i] << "\t";
+	cout << "\n\nEdges of the connected graph are\n";
+	for(int i = 0; i < 14; i++) {
+		cout << edgeList[i][0] << "---" << edgeList[i][1] << "\t";
+	}
+	do {
+		
+		cout << "\nEnter Start node and Goal node within node A to node O :\n";
+		cin >> cStart >> cGoal;
+		cin.clear();
+		//fflush(stdin);
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cStart = toupper(cStart);
+		cGoal = toupper(cGoal);
+	} while (cStart < 'A' || cStart > 'O' || cGoal < 'A' || cGoal > 'O');
+
+	cout << endl;
+	g.DFS(cStart, cGoal);
 	cout << endl;
 	system("pause");
 	return 0;
