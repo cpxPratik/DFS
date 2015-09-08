@@ -145,12 +145,12 @@ void graph::addEdge(char edgeList[][3], int noOfEdges) {
 void graph::DFS(char cStartNode, char cGoalNode) { //creates spanning tree of graph up untill goal node is found using DFS
 	int i, startNode, goalNode;
 	for (i = 0; i < noOfNodes; i++) {
-		if (nodeNames[i] == cStartNode) {
+		if (nodeNames[i] == cStartNode) { // finding start node value
 			startNode = i; break;
 		}
 	}
 	for (i = 0; i < noOfNodes; i++) {
-		if (nodeNames[i] == cGoalNode) {
+		if (nodeNames[i] == cGoalNode) { // finding goal node value
 			goalNode = i; break;
 		}
 	}
@@ -221,7 +221,7 @@ int main() {
 	}
 	do {
 		
-		cout << "\nEnter Start node and Goal node within node A to node O :\n";
+		cout << "\nEnter Start node and Goal node semparated by space [A - O]:\n";
 		cin >> cStart >> cGoal;
 		cin.clear();
 		//fflush(stdin);
